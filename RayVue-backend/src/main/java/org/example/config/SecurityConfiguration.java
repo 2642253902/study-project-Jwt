@@ -11,7 +11,6 @@ import org.example.filter.JwtAuthorizeFilter;
 import org.example.service.AccountService;
 import org.example.utils.JwtUtils;
 import org.jspecify.annotations.Nullable;
-import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
@@ -22,7 +21,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import tools.jackson.databind.util.BeanUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -52,7 +50,7 @@ public class SecurityConfiguration {
         return http
                 .authorizeHttpRequests(auth -> auth
                         // 认证相关接口放行，否则用户还没登录时连登录接口本身都会被拦住。
-                        .requestMatchers("/api/auth/**")
+                        .requestMatchers("/api/auth/**", "/error/**")
                         .permitAll()
                         // 除 /api/auth/** 之外的接口都要求已经认证。
                         .anyRequest()

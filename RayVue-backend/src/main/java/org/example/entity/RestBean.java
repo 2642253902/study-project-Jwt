@@ -8,7 +8,7 @@ public record RestBean<T>(int code, T data, String message) {
 
     // 登录成功时会走这里，把 AuthorizeVO 包成 JSON 响应。
     public static <T> RestBean<T> success(T data) {
-        return new RestBean<>(200, data, "登录成功");
+        return new RestBean<>(200, data, "success");
     }
 
     // 登录成功但没有数据时也会走这里，data 为 null。

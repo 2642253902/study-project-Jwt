@@ -1,4 +1,13 @@
 spring:
+  mail:
+    host: smtp.163.com
+    username: 18897793826@163.com
+    password: HCdTjWXQrsWWanPa
+  rabbitmq:
+    addresses: 111.228.53.34
+    username: admin
+    password: 123456Ok!
+    virtual-host: /
   application:
     name: RayVue-backend
   security:
