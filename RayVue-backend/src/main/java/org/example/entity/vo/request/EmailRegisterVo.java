@@ -3,11 +3,13 @@ package org.example.entity.vo.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
 @Data
 public class EmailRegisterVo {
     @Email
+    @Length(min = 4)
     String email;
 
     @Length(min = 6, max = 6, message = "验证码长度必须为6位")

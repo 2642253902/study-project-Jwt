@@ -18,8 +18,9 @@ spring:
       order: -100
   data:
     redis:
-      host: 127.0.0.1
+      host: 111.228.53.34
       port: 6379
+      password: 123456Ok!
   datasource:
     username: root
     password: root
