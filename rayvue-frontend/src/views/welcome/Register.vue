@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, onBeforeUnmount, reactive, ref } from 'vue'
 import { EditPen, Lock, Message, User } from '@element-plus/icons-vue'
 import router from '@/router'
 import { get, post } from '@/net';
@@ -137,23 +137,22 @@ const isEmailValid = computed(() => {
 });
 
 
-let countdownTimer = null;
 
 function asCode() {
     if (coldTime.value > 0) return;
 
     if (isEmailValid.value) {
         coldTime.value = 60;
-        if (countdownTimer) clearInterval(countdownTimer);
+        get(`/api/auth/ask-code?email=${(form.email)}&type=register`, () => {
+            ElMessage.success('验证码已发送，请注意查收')
+            setInterval(() => {
+                coldTime.value--;
+            }, 1000);
+        }, (error) => {
+            ElMessage.error(error?.response?.data?.message || '发送验证码失败，请稍后再试')
+            coldTime.value = 0;
+        });
 
-        countdownTimer = setInterval(() => {
-            coldTime.value--;
-            if (coldTime.value <= 0) {
-                coldTime.value = 0;
-                clearInterval(countdownTimer);
-                countdownTimer = null;
-            }
-        }, 1000);
     } else {
         ElMessage.error('请输入有效的邮箱地址');
     }

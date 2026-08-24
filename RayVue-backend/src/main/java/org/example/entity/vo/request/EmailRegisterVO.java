@@ -3,11 +3,10 @@ package org.example.entity.vo.request;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
-import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
 @Data
-public class EmailRegisterVo {
+public class EmailRegisterVO {
     @Email
     @Length(min = 4)
     String email;
